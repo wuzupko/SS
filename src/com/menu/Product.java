@@ -11,7 +11,7 @@ package com.menu;
  */
 import java.util.ArrayList;
 
-class Product {
+public class Product {
     /**
      * Product name
      */

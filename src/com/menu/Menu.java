@@ -89,7 +89,7 @@ public class Menu {
      * @param dishRep A copy of the class DishRepository
      *                with all avilable dishes
      *
-     * @return ArrayList<ArrayList<Dish>> list
+     * @return ArrayList<ArrayList<Dish[]>> list
      * if no dish found returns null
      */
     public static ArrayList<Dish[]> complexDinner(double price, DishRepository dishRep) {
@@ -135,7 +135,8 @@ public class Menu {
                         System.out.format("Costs %.2f UAH\n", tempPrice);
                         System.out.format("Change %.2f UAH\n\n\n", price - tempPrice);
                         flagFound = true;
-                        complexDinners.add(dishTemp);
+
+                        complexDinners.add(dishTemp.clone());
 
 
                     }
