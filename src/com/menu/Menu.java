@@ -62,7 +62,9 @@ public class Menu {
        // json.parsingJson(dr.dishList);
        //json.jsonReadingFromFile("fail.json");
         
-        complexDinner(400,dr);
+        Database db=new Database();
+
+        db.closeConnection();
     }
 
     /**
