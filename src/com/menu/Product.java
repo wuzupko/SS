@@ -72,7 +72,7 @@ public class Product {
      * Setter for product cost
      * @param cost product price for 1 kilogram
      */
-    public void setCost(int cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 

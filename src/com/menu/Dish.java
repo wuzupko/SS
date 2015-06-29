@@ -14,10 +14,24 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Dish {
+    public HashMap<Product, Double> getMapDishProductsList() {
+        return mapDishProductsList;
+    }
+
     /**
      * Map with all dish components(Product class) and it's weights
      */
     public HashMap<Product, Double> mapDishProductsList;
+    int ID;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     /**
      * Dish name
      */

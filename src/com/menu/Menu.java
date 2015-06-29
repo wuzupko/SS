@@ -1,4 +1,7 @@
 package com.menu;
+
+import java.util.ArrayList;
+
 /**
  * Menu class has main main and other methods
  * which make actions with menu class
@@ -8,12 +11,8 @@ package com.menu;
  * @since       1.0
  */
 
-import javax.xml.bind.SchemaOutputResolver;
-import java.util.ArrayList;
-
-
-public class Menu {
-    /**
+public class Menu{
+/**
      * Menu name
      */
     private String name;
@@ -55,16 +54,18 @@ public class Menu {
      * @param args command line parameter
      */
     public static void main(String[] args) {
-        ProductRepository pr = new ProductRepository();
-        DishRepository dr = new DishRepository(pr);
+//        ProductRepository pr = new ProductRepository();
+//        DishRepository dr = new DishRepository(pr);
 
         //JsonWritingAndReadingFile json = new JsonWritingAndReadingFile();
        // json.parsingJson(dr.dishList);
        //json.jsonReadingFromFile("fail.json");
         
-        Database db=new Database();
+//        Database db=new Database();
+//        db.creatTableProducts();
+//        db.closeConnection();
 
-        db.closeConnection();
+
     }
 
     /**
@@ -81,6 +82,7 @@ public class Menu {
             if (!dishRep.isAvailabilityByName(dName)) continue;
             newDishMenu.add(dishRep.getDishByName(dName));
         }
+
         System.out.println("New Menu: " + name);
         return newDishMenu;
     }
