@@ -1,5 +1,5 @@
 package com.menu;
-
+import org.slf4j.Logger;
 import java.util.ArrayList;
 
 /**
@@ -62,8 +62,8 @@ public class Menu{
        //json.jsonReadingFromFile("fail.json");
         Dish dish=new Dish();
         Database db=new Database();
-        //db.d(dr.getDishByName("Tea"));
-        System.out.println(dish.getID());
+        db.addDish(dr.getDishByName("Tea"));
+
         db.closeConnection();
 
 
