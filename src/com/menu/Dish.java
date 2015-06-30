@@ -51,6 +51,10 @@ public class Dish {
     public Dish() {
     }
 
+    public void setMapDishProductsList(HashMap<Product, Double> mapDishProductsList) {
+        this.mapDishProductsList = mapDishProductsList;
+    }
+
     /**
      * Constructor
      * @param dishName sets Dish name
@@ -61,6 +65,7 @@ public class Dish {
         this.dishName = dishName;
         this.category = cat;
         this.mapDishProductsList = map;
+
     }
 
     /**

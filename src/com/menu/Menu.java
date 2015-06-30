@@ -54,16 +54,18 @@ public class Menu{
      * @param args command line parameter
      */
     public static void main(String[] args) {
-//        ProductRepository pr = new ProductRepository();
-//        DishRepository dr = new DishRepository(pr);
+        ProductRepository pr = new ProductRepository();
+        DishRepository dr = new DishRepository(pr);
 
         //JsonWritingAndReadingFile json = new JsonWritingAndReadingFile();
        // json.parsingJson(dr.dishList);
        //json.jsonReadingFromFile("fail.json");
-        
-//        Database db=new Database();
-//        db.creatTableProducts();
-//        db.closeConnection();
+        Dish dish=new Dish();
+        Database db=new Database();
+        db.d(dr.getDishByName("Tea"));
+        System.out.println(dish.getID());
+        db.closeConnection();
+
 
 
     }

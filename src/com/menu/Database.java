@@ -2,6 +2,7 @@ package com.menu;
 import java.sql.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,12 +20,12 @@ public class Database {
         }
     }
 
-    public void creatTableProducts() {
+    public void createTableProducts() {
         try {
         st.execute("Drop table Products");
         st.execute("CREATE TABLE Products (" +
                 "ID int NOT NULL AUTO_INCREMENT," +
-                "pName varchar(20) NOT NULL," +
+                "pName varchar(20) NOT NULL UNIQUE," +
                 "pWeight real(5)," +
                 "pCost real(5)," +
                 "PRIMARY KEY (ID)" +
@@ -34,12 +35,12 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public void creatTableDishes() {
+    public void createTableDishes() {
         try {
         st.execute("Drop table Dishes");
         st.execute("CREATE TABLE Dishes (" +
                 "ID int NOT NULL AUTO_INCREMENT," +
-                "dName varchar (20)," +
+                "dName varchar (20) UNIQUE," +
                 "dCategory int(1)," +
                 "PRIMARY KEY (ID)" +
                 ")");
@@ -48,7 +49,7 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public void creatTableListIngredients() {
+    public void createTableListIngredients() {
         try {
             st.execute("Drop table ListIngredients");
             st.execute("CREATE TABLE ListIngredients (" +
@@ -64,14 +65,15 @@ public class Database {
         }
     }
     public void addDish(Dish dish){
-
+        ResultSet rs;
         try {
             HashMap<Product, Double> mapDishProductsList=new HashMap<Product, Double>(dish.getMapDishProductsList());
             //mapDishProductsList=dish.getMapDishProductsList();
-            st.execute("INSERT INTO DISHES (dID,dName, dCategory)"+
-                    "VALUES ("+dish.getID()+",'"+dish.getDishName()+"',"+dish.getCategory()+");");
-
-
+            st.execute("INSERT INTO DISHES (dName, dCategory)"+
+                    "VALUES ('"+dish.getDishName()+"',"+dish.getCategory()+");");
+            rs=st.executeQuery("SELECT ID FROM Dishes WHERE dname='"+dish.getDishName()+"'");
+            rs.next();
+            dish.setID(rs.getInt(1));
 
             for (Map.Entry<Product, Double> entry : mapDishProductsList.entrySet()) {
                 st.execute("INSERT INTO ListIngredients (dID,pID, pWeight)" +
@@ -85,24 +87,78 @@ public class Database {
     }
     public Dish getDish(String dName){
         Dish dish=new Dish();
-        ResultSet result;
+        Product prod=new Product();
+        HashMap<Product, Double> mapDishProductsList=new HashMap<Product, Double>();
+        ResultSet rs;
         try {
-            result=st.executeQuery("SELECT dID,dName,dCategory FROM Dishes" +
-                    "WHERE dName=" + dName + "; UNION ");
-            dish.setID(result.getInt("dID"));
+
+            rs = st.executeQuery("SELECT * FROM Dishes " +
+                    "WHERE dName='" + dName + "';");
+            rs.next();
+            dish.setID(rs.getInt("ID"));
             dish.setDishName(dName);
-            dish.setCategory(result.getInt("dCategory"));
+            dish.setCategory(rs.getInt("dCategory"));
 
-            result=st.executeQuery("SELECT ListIngredients.dID, ListIngredients.pID, ListIngredients.pWeight, Products.ID, Products.pName, Products.Cost,  "+
-            "FROM ListIngredients,Products" +
-                    "WHERE (ListIngredients.dID="+ dish.getID()+") AND (ListIngredients.pID=Products.ID) ORDER BY ListIngredients.dID ;");
+//            rs=st.executeQuery("SELECT ListIngredients.dID, ListIngredients.pID, ListIngredients.pWeight, Products.ID, Products.pName, Products.Cost,  "+
+//            "FROM ListIngredients,Products" +
+//                    "WHERE (ListIngredients.dID="+ dish.getID()+") AND (ListIngredients.pID=Products.ID) ORDER BY ListIngredients.dID ;");
 
-            result=st.executeQuery("SELECT dishes.ID ,listingredients.pid ,dishes.dname FROM Dishes INNER JOIN  ListINgredients ON dishes.ID=ListIngredients.dID INNER JOIN Products ON products.ID=ListIngredients.pID\n" +
-                    "WHERE (ListIngredients.dID=1) AND (ListIngredients.pID=Products.ID) AND (dishes.dname='Borsh') ORDER BY  dishes.ID");
+            rs=st.executeQuery("SELECT dishes.ID , listIngredients.pWeight ,dishes.dName,products.pName, Products.ID, products.pCost FROM Dishes INNER JOIN  ListIngredients ON dishes.ID=ListIngredients.dID INNER JOIN Products ON products.ID=ListIngredients.pID\n" +
+                    "WHERE (ListIngredients.dID="+dish.getID()+") AND (ListIngredients.pID=Products.ID) AND (dishes.dname='"+dName+"') ORDER BY  dishes.ID");
 
+            while (rs.next()) {
+                prod.setId( rs.getInt("Products.ID"));
+                prod.setName(rs.getString("Products.pName"));
+                prod.setCost(rs.getDouble("products.pCost"));
+                double pWeight= rs.getDouble("listIngredients.pWeight");
+                mapDishProductsList.put(prod,pWeight);
 
+            }
+            dish.setMapDishProductsList(mapDishProductsList);
+        return dish;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public ArrayList<Dish>  getAllDish(){
+        Dish dish=new Dish();
+        Product prod=new Product();
+        ArrayList<Dish> dishList = new ArrayList();
 
+        HashMap<Product, Double> mapDishProductsList=new HashMap<Product, Double>();
+        ResultSet allDishes;
+        ResultSet dishIngredients;
+        try {
+
+            allDishes = st.executeQuery("SELECT * FROM Dishes");
+            while(allDishes.next()) {
+                dish.setID(allDishes.getInt("ID"));
+                dish.setDishName(allDishes.getString("dName"));
+                dish.setCategory(allDishes.getInt("dCategory"));
+
+//            allDishes=st.executeQuery("SELECT ListIngredients.dID, ListIngredients.pID, ListIngredients.pWeight, Products.ID, Products.pName, Products.Cost,  "+
+//            "FROM ListIngredients,Products" +
+//                    "WHERE (ListIngredients.dID="+ dish.getID()+") AND (ListIngredients.pID=Products.ID) ORDER BY ListIngredients.dID ;");
+
+                dishIngredients = st.executeQuery("SELECT dishes.ID , listIngredients.pWeight ,dishes.dName,products.pName, Products.ID, products.pCost FROM Dishes INNER JOIN  ListIngredients ON dishes.ID=ListIngredients.dID INNER JOIN Products ON products.ID=ListIngredients.pID\n" +
+                        "WHERE (ListIngredients.dID=" + dish.getID() + ") AND (ListIngredients.pID=Products.ID) AND (dishes.dname='" + dish.getDishName() + "') ORDER BY  dishes.ID");
+
+                while (dishIngredients.next()) {
+                    prod.setId(dishIngredients.getInt("Products.ID"));
+                    prod.setName(dishIngredients.getString("Products.pName"));
+                    prod.setCost(dishIngredients.getDouble("products.pCost"));
+                    double pWeight = dishIngredients.getDouble("listIngredients.pWeight");
+                    mapDishProductsList.put(prod, pWeight);
+
+                }
+                dish.setMapDishProductsList(mapDishProductsList);
+                dishList.add(dish);
+                dish=new Dish();
+                mapDishProductsList=new HashMap<Product, Double>();
+            }
+            return dishList;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,7 +191,7 @@ public class Database {
         try {
            result= st.executeQuery("SELECT * FROM Products where" +
                    "pName=('" + product + "';");
-            prod.setId(result.getInt("pID"));
+            prod.setId(result.getInt("ID"));
             prod.setName(result.getString("pName"));
             prod.setKillogram(result.getDouble("pWeight"));
             prod.setCost(result.getDouble("pCost"));
