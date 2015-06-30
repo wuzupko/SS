@@ -8,12 +8,13 @@ import java.util.Map;
 
 public class Database {
     Statement st = null;
+    Connection con=null;
         public Database(){
         try {
             Class.forName("org.h2.Driver").newInstance();
-            Connection conn = DriverManager.getConnection("jdbc:h2:~/test","sa", "");
+            con  = DriverManager.getConnection("jdbc:h2:~/test","sa", "");
 
-           st = conn.createStatement();
+           st = con.createStatement();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -58,6 +59,8 @@ public class Database {
                     "pID int (2),"+
                     "pWeight real(5)," +
                     "PRIMARY KEY (ID)" +
+                    "FOREIGN KEY (dID)" +
+                    "FOREIGN KEY (pID)" +
                     ")");
 
         } catch (Exception e) {
@@ -122,7 +125,7 @@ public class Database {
         return null;
     }
 
-    public ArrayList<Dish>  getAllDish(){
+    public ArrayList<Dish> getAllDishes(){
         Dish dish=new Dish();
         Product prod=new Product();
         ArrayList<Dish> dishList = new ArrayList();
@@ -209,12 +212,12 @@ public class Database {
             e.printStackTrace();
         }
     }
-    public Product getProduct(String product){
+    public Product getProductByName(String productName){
         Product prod=new Product();
         ResultSet result;
         try {
            result= st.executeQuery("SELECT * FROM Products where" +
-                   "pName=('" + product + "';");
+                   "pName=('" + productName + "';");
             prod.setId(result.getInt("ID"));
             prod.setName(result.getString("pName"));
             prod.setKillogram(result.getDouble("pWeight"));
@@ -227,7 +230,8 @@ public class Database {
     }
     public void closeConnection(){
         try{
-        this.st.close();
+            this.st.close();
+            this.con.close();
 
         }catch (Exception e){
             e.printStackTrace();

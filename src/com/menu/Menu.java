@@ -62,7 +62,7 @@ public class Menu{
        //json.jsonReadingFromFile("fail.json");
         Dish dish=new Dish();
         Database db=new Database();
-        db.d(dr.getDishByName("Tea"));
+        //db.d(dr.getDishByName("Tea"));
         System.out.println(dish.getID());
         db.closeConnection();
 
