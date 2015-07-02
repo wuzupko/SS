@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/plugins/testng/lib/testng.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/gson-2.2.4 (2)"/>
+	<classpathentry kind="var" path="APPLICATION_HOME_DIR/lib/junit-4.11.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/h2-1.4.187"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slf4j-api-1.7.9"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/slf4j-jdk14-1.7.9"/>
+	<classpathentry kind="output" path="out/production/Menu1"/>
+</classpath>
