@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="log4j-flume-ng-2.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/log4j-flume-ng-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/log4j-iostreams-2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/.idea/libraries/log4j-jul-2.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
