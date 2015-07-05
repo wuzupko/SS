@@ -27,13 +27,13 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="main.java.com.menu" level="debug" additivity="true">
+        <Logger name="com.menu" level="debug" additivity="true">
             <appender-ref ref="trace-log" />
             <appender-ref ref="console-log" level="debug"/>
         </Logger>
         <Root level="error" additivity="true">
-            <AppenderRef ref="console-log" />
-            <appenderRef ref="error-log" level="error"/>
+            <!--<AppenderRef ref="console-log" />-->
+            <!--<appenderRef ref="error-log" level="error"/>-->
         </Root>
     </Loggers>
 </Configuration>

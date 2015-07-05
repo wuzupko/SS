@@ -13,7 +13,8 @@ import java.util.Map;
 public class Database {
     Statement st = null;
     Connection con=null;
-    private static final Logger logger = LogManager.getLogger("main.java.com.menu.Database");
+    private static final Logger logger = LogManager.getLogger(Database.class);
+
         public Database(){
         try {
 

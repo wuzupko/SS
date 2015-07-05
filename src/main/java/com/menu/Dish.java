@@ -10,9 +10,16 @@ package com.menu;
  * @version     1.5
  * @since       1.0
  */
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.HashMap;
 import java.util.Map;
-
+@Entity
+@Table(name= "Dish")
 public class Dish {
     public HashMap<Product, Double> getMapDishProductsList() {
         return mapDishProductsList;
@@ -22,6 +29,9 @@ public class Dish {
      * Map with all dish components(Product class) and it's weights
      */
     public HashMap<Product, Double> mapDishProductsList;
+    @Id
+    @GeneratedValue
+    @Column(name = "ID")
     int ID;
 
     public int getID() {

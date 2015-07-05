@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="H2 - test" uuid="76259fab-fdaf-4677-bfb2-aa78050ce0c3">
+    <database-info product="H2" version="1.4.187 (2015-04-10)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.187 (2015-04-10)">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="PUBLIC" catalog="TEST"/>
+    <table name="DISHES" schema="PUBLIC" catalog="TEST" type="TABLE">
+      <column name="ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfREI2RTM2RUNfOUY1QV80OTBGX0JDMUZfQkQ0OEZBQjEwOTEzKQ==" autoIncrement="true"/>
+      <column name="DNAME" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DCATEGORY" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="CONSTRAINT_78" columns="ID"/>
+    </table>
+    <table name="LISTINGREDIENTS" schema="PUBLIC" catalog="TEST" type="TABLE">
+      <column name="ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfRkVDOTc4Q0RfNzJDNl80MUZEX0IwQjNfNDc1NDk0RUFBOTQxKQ==" autoIncrement="true"/>
+      <column name="DID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PID" sqlType="INTEGER" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="PWEIGHT" sqlType="REAL" precision="7" scale="0" nullable="true" jdbcType="7"/>
+      <primary-key name="CONSTRAINT_F3" columns="ID"/>
+    </table>
+    <table name="PRODUCTS" schema="PUBLIC" catalog="TEST" type="TABLE">
+      <column name="ID" sqlType="INTEGER" precision="10" scale="0" nullable="false" jdbcType="4" def="KE5FWFQgVkFMVUUgRk9SIFBVQkxJQy5TWVNURU1fU0VRVUVOQ0VfQTQ4MUQ0MTRfNTlCRF80RDVCX0E3MDFfQ0NGODQ4QUEwOThEKQ==" autoIncrement="true"/>
+      <column name="PNAME" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="PWEIGHT" sqlType="REAL" precision="7" scale="0" nullable="true" jdbcType="7"/>
+      <column name="PCOST" sqlType="REAL" precision="7" scale="0" nullable="true" jdbcType="7"/>
+      <primary-key name="CONSTRAINT_F2" columns="ID"/>
+    </table>
+  </data-source>
+</component>

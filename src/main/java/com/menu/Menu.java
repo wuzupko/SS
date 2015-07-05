@@ -1,7 +1,6 @@
 package com.menu;
 import org.apache.logging.log4j.*;
 
-
 import java.util.ArrayList;
 
 /**
@@ -56,12 +55,14 @@ public class Menu{
      * Main project class
      * @param args command line parameter
      */
-    private static final Logger logger = LogManager.getLogger(Database.class.getName());
+    private static final Logger logger = LogManager.getLogger(Menu.class.getName());
+
     public static void main(String[] args) {
         System.out.println();
         ProductRepository pr = new ProductRepository();
         DishRepository dr = new DishRepository(pr);
-
+        logger.error("error");
+        logger.debug("debug");
         //JsonWritingAndReadingFile json = new JsonWritingAndReadingFile();
        // json.parsingJson(dr.dishList);
        //json.jsonReadingFromFile("fail.json");
@@ -73,6 +74,12 @@ public class Menu{
 
 
 
+//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("manager1");
+//        EntityManager em = emf.createEntityManager();
+//
+//        em.close();
+//
+//        emf.close(); //close at application end
 
     }
 
